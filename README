@@ -6,25 +6,26 @@
 ## For both advanced and basic users
 ## created by Cale Black (cablack@rams.colostate.edu)  2012-05-05
 ## Liscenced by GPL
-## Changes: (0.8.0)
+## Changes: (0.8.1)
 ## Added Color to splash screen
 ## Added quick change for SSID and Channel Number
 ## Added clear upload / download folder in config (may move it to main menu)
 ## Updated download only for script version .4
+## 0.8.1 Added a back option in Config sub menu
 
 More info and updates at: CyberNihilism.net
 and			  forum.daviddarts.com
 
 TODO:
-	Finalize Menu
-	Add a splash screen with ASCII PirateBox logo
-	Add manage files (opens PB folder in nautilaus)
+	Finalize Menu [Done]
+	Add a splash screen with ASCII PirateBox logo [Done]
+	Add manage files (opens PB folder in nautilaus) [Done]
 	Add Manual	
-	Create a Config option
+	Create a Config option [Done]
 	Add Debugging
 	Interface for managing files (may wait until GUI)
 
-	LiveCD Fork
+	LiveCD Fork [In Progress]
 ##########################################################################
 ## PirateBox for Laptops Scripts (By Matthias Strubel)
 ##########################################################################
