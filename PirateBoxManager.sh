@@ -19,31 +19,16 @@
 # Credit for the wonderful scripts goes to Matthias Strubel
 #                       
 ###########################################################################################################################
-###########Version 0.8.0###################################################################################################
-# Added Color to splash screen
-# Added quick change for SSID and Channel Number
-# Added clear upload / download folder in config (may move it to main menu)
-# Updated download only for script version .4
-###########################################################################################################################
-#Final menu will be: [X]
-#1) Install PirateBox (only run one time) [X]
-#2) Start PirateBox [X]
-#3) Stop PirateBox [X]
-#4) Manage Files [X]
-#5) Download scripts only [X]
-#6) Configure [X]
-#7) Exit [X]
+###########Version 0.8.2###################################################################################################
+#Bug fixes
+#PirateBox Manager now downloads correctly to /opt/piratebox/bin
+#Fixed back option in config sub menu
 ###########################################################################################################################
 #Add manage files (opens PB folder in nautilaus) []
 ###########################################################################################################################
-#Create a Config option and include hostapd.conf and piratebox.conf [X]
 #Add quick configuration options:
-#	- Change SSID [X]
-#	- Change Channel [X]
 #	- Change PirateBox upload / download directory 
 #	- Clear PirateBox upload / download directory
-###########################################################################################################################
-#View Upload folder [X]
 ###########################################################################################################################
 #Add Debugging for: []
 #No package for dnsmasq and hostapd (Older versions 10.04 and below do not have universe debs active by default, see comments in option 1) []
@@ -94,6 +79,7 @@ sudo ln -s /opt/piratebox/init.d/piratebox /etc/init.d/piratebox
 sudo chmod 777 /opt/piratebox/chat/cgi-bin/data.pso
 echo "192.168.77.1  piratebox.lan">>/etc/hosts
 echo "192.168.77.1  piratebox">>/etc/hosts
+wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
 sudo service network-manager stop
 sudo killall dhclient
 sudo killall dnsmasq
@@ -139,6 +125,7 @@ sudo wget -P /tmp/ http://piratebox.aod-rpg.de/dokuwiki/lib/exe/fetch.php?media=
 cd /tmp/
 sudo cp -i fetch.php?media=piratebox-scripts_0.4.tar.gz piratebox-scripts_0.4.tar.gz
 sudo rm fetch.php?media=piratebox-scripts_0.4.tar.gz
+wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
 echo "Files saved in /tmp"
 echo ""
 echo "1) Quick install for Debian based systems"
@@ -155,7 +142,7 @@ break
 "Configure")
 echo ""
 PS3='Please enter your choice: '
-config=("Clear PirateBox Upload Folder" "Change SSID" "Change Channel" "Edit piratebox.conf" "Edit hostapd.conf" "Quit")
+config=("Clear PirateBox Upload Folder" "Change SSID" "Change Channel" "Edit piratebox.conf" "Edit hostapd.conf" "Back" "Quit")
 select config in "${config[@]}"
 do
     case $config in
@@ -196,6 +183,9 @@ nano /opt/piratebox/conf/piratebox.conf
 nano /opt/piratebox/conf/hostapd.conf
 ;;
  
+"Back")
+sudo bash /opt/piratebox/bin/PirateBoxManager.sh
+;;
 "Quit")
 break
 ;;
