@@ -149,11 +149,11 @@ echo "The last revision is backed up in /opt/piratebox/conf/hostapd.conf.bak"
 ;;
 
 "Edit piratebox.conf")
-nano /opt/piratebox/conf/piratebox.conf
+sudo nano /opt/piratebox/conf/piratebox.conf
 ;;
 
 "Edit hostapd.conf")
-nano /opt/piratebox/conf/hostapd.conf
+sudo nano /opt/piratebox/conf/hostapd.conf
 ;;
  
 "Back")
