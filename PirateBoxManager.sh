@@ -149,7 +149,7 @@ do
 "Clear PirateBox Upload Folder")
 #read -p "Remove all files AND sub-directories (y/n)"
 #[ "$REPLY" == "y" ]
-rm -rf /opt/piratebox/share/*
+sudo rm -rf /opt/piratebox/share/*
 echo "Deleted all files in the directory"
 #[ "$REPLY" != "y" ]
 #rm /opt/piratebox/share/*
@@ -157,9 +157,9 @@ echo "Deleted all files in the directory"
 "Change SSID")
 echo "Enter new SSID: "
 read SSID
-sed '3s/.*/ssid='$SSID'/' </opt/piratebox/conf/hostapd.conf> /opt/piratebox/conf/hostapd.conf.new
-cp -i /opt/piratebox/conf/hostapd.conf /opt/piratebox/hostapd.conf.bak
-cp -i /opt/piratebox/conf/hostapd.conf.new /opt/piratebox/hostapd.conf
+sudo sed '3s/.*/ssid='$SSID'/' </opt/piratebox/conf/hostapd.conf> /opt/piratebox/conf/hostapd.conf.new
+sudo cp -i /opt/piratebox/conf/hostapd.conf /opt/piratebox/hostapd.conf.bak
+sudo cp -i /opt/piratebox/conf/hostapd.conf.new /opt/piratebox/hostapd.conf
 ;;
 
 "Change Channel")
@@ -169,9 +169,9 @@ read CHANNEL
 #then
 #echo "Must be less than 14"
 #fi
-sed '5s/.*/channel='$CHANNEL'/' </opt/piratebox/conf/hostapd.conf> /opt/piratebox/conf/hostapd.conf.new
-cp -i /opt/piratebox/conf/hostapd.conf /opt/piratebox/hostapd.conf.bak
-cp -i /opt/piratebox/conf/hostapd.conf.new /opt/piratebox/hostapd.conf
+sudo sed '5s/.*/channel='$CHANNEL'/' </opt/piratebox/conf/hostapd.conf> /opt/piratebox/conf/hostapd.conf.new
+sudo cp -i /opt/piratebox/conf/hostapd.conf /opt/piratebox/hostapd.conf.bak
+sudo cp -i /opt/piratebox/conf/hostapd.conf.new /opt/piratebox/hostapd.conf
 echo "The last revision is backed up in /opt/piratebox/conf/hostapd.conf.bak"
 ;;
 
