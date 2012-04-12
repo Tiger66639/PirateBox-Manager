@@ -120,7 +120,7 @@ echo "7) Quit"
 ;;
 
 "Manage PirateBox Download / Upload Folder")
-sudo nautilus /opt/piratebox/tmp &
+sudo nautilus /opt/piratebox/share
 ;;
 
 "Just Download the Scripts")
