@@ -19,7 +19,7 @@
 # Credit for the wonderful scripts goes to Matthias Strubel
 #                       
 ###########################################################################################################################
-###########Version 0.1.0###################################################################################################
+###########Version 0.1.2###################################################################################################
 # LiveCD version of PirateBoxManager
 ###########################################################################################################################
 clear
@@ -44,7 +44,6 @@ sudo ln -s /opt/piratebox/init.d/piratebox /etc/init.d/piratebox
 sudo chmod 777 /opt/piratebox/chat/cgi-bin/data.pso
 echo "192.168.77.1  piratebox.lan">>/etc/hosts
 echo "192.168.77.1  piratebox">>/etc/hosts
-sudo wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
 sudo service network-manager stop
 sudo killall hostapd
 sudo killall dhclient
