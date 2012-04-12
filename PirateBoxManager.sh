@@ -88,9 +88,10 @@ echo ""
 echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
-echo "4) Just Download the Scripts"
-echo "5) Configure"
-echo "6) Quit"
+echo "4) Manage Download / Upload Folder"
+echo "5) Just Download the Scripts"
+echo "6) Configure"
+echo "7) Quit"
 ;;
 
 "Start PirateBox")
@@ -99,9 +100,10 @@ echo ""
 echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
-echo "4) Just Download the Scripts"
-echo "5) Configure"
-echo "6) Quit"
+echo "4) Manage Download / Upload Folder"
+echo "5) Just Download the Scripts"
+echo "6) Configure"
+echo "7) Quit"
 ;;
 
 "Stop PirateBox")
@@ -111,9 +113,10 @@ echo ""
 echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
-echo "4) Just Download the Scripts"
-echo "5) Configure"
-echo "6) Quit"
+echo "4) Manage Download / Upload Folder"
+echo "5) Just Download the Scripts"
+echo "6) Configure"
+echo "7) Quit"
 ;;
 
 "Manage PirateBox Download / Upload Folder")
@@ -131,9 +134,10 @@ echo ""
 echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
-echo "4) Just Download the Scripts"
-echo "5) Configure"
-echo "6) Quit"
+echo "4) Manage Download / Upload Folder"
+echo "5) Just Download the Scripts"
+echo "6) Configure"
+echo "7) Quit"
 ;;
 "Quit")
 break
