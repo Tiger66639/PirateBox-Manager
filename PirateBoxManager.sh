@@ -43,14 +43,6 @@
 #Help Develope? page []
 #Art []
 ###########################################################################################################################
-#GUI []
-#Make out of wxPython
-#Or Java later on for multiple OS?
-###########################################################################################################################
-#LiveCD fork []
-#PirateBox Manager LiveCD version
-#Disables install option (will be installed by default)
-###########################################################################################################################
 clear
 echo -e '\E[0;30m'"\033[1m
 __________ __                 __         __________   ____    ____          
@@ -68,22 +60,51 @@ select opt in "${options[@]}"
 do
     case $opt in
 "Quick install for Debian based systems")
-sudo wget -P /tmp/ http://piratebox.aod-rpg.de/dokuwiki/lib/exe/fetch.php?media=piratebox-scripts_0.4.tar.gz
-cd /tmp/
-sudo cp -i fetch.php?media=piratebox-scripts_0.4.tar.gz piratebox-scripts_0.4.tar.gz
-sudo rm fetch.php?media=piratebox-scripts_0.4.tar.gz
-sudo tar xzvf piratebox*.tar.gz
-cd /tmp/piratebox
-sudo cp -rv piratebox /opt
-sudo ln -s /opt/piratebox/init.d/piratebox /etc/init.d/piratebox 
-sudo chmod 777 /opt/piratebox/chat/cgi-bin/data.pso
-echo "192.168.77.1  piratebox.lan">>/etc/hosts
-echo "192.168.77.1  piratebox">>/etc/hosts
-wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
-sudo service network-manager stop
-sudo killall dhclient
-sudo killall dnsmasq
-sudo /etc/init.d/piratebox start
+sudo apt-get install nginx
+cd /var/www/nginx-default
+rm index.html
+wget -P /var/www #Uploaded HTML / PHP / etc files for uploading
+cd /etc/nginx
+openssl genrsa -des3 -out server.key 1024
+openssl req -new -key server.key -out server.csr
+cp server.key server.key.org
+openssl rsa -in server.key.org -out server.key
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+echo "server {">>/etc/nginx/sites-enabled/default
+echo "listen   443;">>/etc/nginx/sites-enabled/default
+echo "server_name  localhost;">>/etc/nginx/sites-enabled/default
+echo "">>/etc/nginx/sites-enabled/default
+echo "ssl  on;">>/etc/nginx/sites-enabled/default
+echo "ssl_certificate  /etc/nginx/server.crt;">>/etc/nginx/sites-enabled/default
+echo "ssl_certificate_key  /etc/nginx/server.key;">>/etc/nginx/sites-enabled/default
+echo "">>/etc/nginx/sites-enabled/default
+echo "ssl_session_timeout  5m;">>/etc/nginx/sites-enabled/default
+echo "">>/etc/nginx/sites-enabled/default
+echo "ssl_protocols  SSLv2 SSLv3 TLSv1;">>/etc/nginx/sites-enabled/default
+echo "ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;">>/etc/nginx/sites-enabled/default
+echo "ssl_prefer_server_ciphers   on;">>/etc/nginx/sites-enabled/default
+echo "location / {">>/etc/nginx/sites-enabled/default
+echo "root   /var/www/nginx-default;">>/etc/nginx/sites-enabled/default
+echo "index  index.html index.htm;">>/etc/nginx/sites-enabled/default
+echo "}">>/etc/nginx/sites-enabled/default
+echo "}">>/etc/nginx/sites-enabled/default
+
+#sudo wget -P /tmp/ http://piratebox.aod-rpg.de/dokuwiki/lib/exe/fetch.php?media=piratebox-scripts_0.4.tar.gz
+#cd /tmp/
+#sudo cp -i fetch.php?media=piratebox-scripts_0.4.tar.gz piratebox-scripts_0.4.tar.gz
+#sudo rm fetch.php?media=piratebox-scripts_0.4.tar.gz
+#sudo tar xzvf piratebox*.tar.gz
+#cd /tmp/piratebox
+#sudo cp -rv piratebox /opt
+#sudo ln -s /opt/piratebox/init.d/piratebox /etc/init.d/piratebox 
+#sudo chmod 777 /opt/piratebox/chat/cgi-bin/data.pso
+#echo "192.168.77.1  piratebox.lan">>/etc/hosts
+#echo "192.168.77.1  piratebox">>/etc/hosts
+#wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
+#sudo service network-manager stop
+#sudo killall dhclient
+#sudo killall dnsmasq
+#sudo /etc/init.d/piratebox start
 echo ""
 echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
