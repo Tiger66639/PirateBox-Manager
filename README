@@ -6,13 +6,8 @@
 ## For both advanced and basic users
 ## created by Cale Black (cablack@rams.colostate.edu)  2012-05-05
 ## Liscenced by GPL
-## Changes: (0.8.1)
-## Added Color to splash screen
-## Added quick change for SSID and Channel Number
-## Added clear upload / download folder in config (may move it to main menu)
-## Updated download only for script version .4
-## 0.8.1 Added a back option in Config sub menu
-
+## Changes: (0.8.8)
+## Major bug fixes
 More info and updates at: CyberNihilism.net
 and			  forum.daviddarts.com
 
@@ -25,7 +20,9 @@ TODO:
 	Add Debugging
 	Interface for managing files (may wait until GUI)
 
-	LiveCD Fork [In Progress]
+	LiveCD Fork [In Progress with First Version released]
+
+	Lighttpd form using /MaStr/PirateBoxScripts_Webserver [In progress]
 
 Here are some images of it running: http://imgur.com/a/MLWcv
 ##########################################################################
