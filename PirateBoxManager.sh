@@ -17,12 +17,8 @@
 # Credit for the wonderful scripts goes to Matthias Strubel
 #                       
 ###########################################################################################################################
-###########Version 0.8.2###################################################################################################
+###########Version 0.8.9###################################################################################################
 #Bug fixes
-#PirateBox Manager now downloads correctly to /opt/piratebox/bin
-#Fixed back option in config sub menu
-###########################################################################################################################
-#Add manage files (opens PB folder in nautilaus) []
 ###########################################################################################################################
 #Add quick configuration options:
 #	- Change PirateBox upload / download directory 
@@ -44,10 +40,6 @@
 #GUI []
 #Make out of wxPython
 #Or Java later on for multiple OS?
-###########################################################################################################################
-#LiveCD fork []
-#PirateBox Manager LiveCD version
-#Disables install option (will be installed by default)
 ###########################################################################################################################
 clear
 echo -e '\E[0;30m'"\033[1m
@@ -127,7 +119,10 @@ cd /tmp/
 sudo cp -i fetch.php?media=piratebox-scripts_0.4.tar.gz piratebox-scripts_0.4.tar.gz
 sudo rm fetch.php?media=piratebox-scripts_0.4.tar.gz
 wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
-echo "Files saved in /tmp"
+
+echo "#####################"
+echo "#Files saved in /tmp#"
+echo "#####################"
 echo ""
 echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
@@ -152,6 +147,8 @@ do
 #read -p "Remove all files AND sub-directories (y/n)"
 #[ "$REPLY" == "y" ]
 sudo rm -rf /opt/piratebox/share/*
+sudo cp -i /opt/piratebox/src/.READ.ME.htm /opt/piratebox/share
+sudo cp -i /opt/piratebox/src/.BACK.TO.MENU.htm /opt/piratebox/share
 echo "Deleted all files in the directory"
 #[ "$REPLY" != "y" ]
 #rm /opt/piratebox/share/*
