@@ -17,12 +17,9 @@
 # Credit for the wonderful scripts goes to Matthias Strubel
 #                       
 ###########################################################################################################################
-###########Version 0.8.9###################################################################################################
-#Bug fixes
-###########################################################################################################################
-#Add quick configuration options:
-#	- Change PirateBox upload / download directory 
-#	- Clear PirateBox upload / download directory
+###########Version 0.9.0###################################################################################################
+#Updated to use Lighttp scripts from Matthias (Configure most definantly is broken and is my next project)
+#Deleted Just Download option and instead had it copy the tar.gz to /opt/piratebox
 ###########################################################################################################################
 #Add Debugging for: []
 #No package for dnsmasq and hostapd (Older versions 10.04 and below do not have universe debs active by default, see comments in option 1) []
@@ -52,17 +49,20 @@ __________ __                 __         __________   ____    ____
 \033[0m"                                   
 echo ""
 PS3='Please enter your choice: '
-options=("Quick install for Debian based systems" "Start PirateBox" "Stop PirateBox" "Manage PirateBox Download / Upload Folder" "Just Download the Scripts" "Configure" "Quit")
+options=("Quick install for Debian based systems" "Start PirateBox" "Stop PirateBox" "Manage PirateBox Download / Upload Folder" "Configure" "Quit")
 
 select opt in "${options[@]}"
 do
     case $opt in
 "Quick install for Debian based systems")
-sudo wget -P /tmp/ http://piratebox.aod-rpg.de/dokuwiki/lib/exe/fetch.php?media=piratebox-scripts_0.4.tar.gz
+sudo apt-get install perl
+sudo apt-get install lighttpd
+sudo apt-get install hostapd
+sudo apt-get install dnsmasq
+sudo wget -P /tmp/ https://github.com/MaStr/PirateBoxScripts_Webserver/raw/master/piratebox-ws_0.2.0.tar.gz
 cd /tmp/
-sudo cp -i fetch.php?media=piratebox-scripts_0.4.tar.gz piratebox-scripts_0.4.tar.gz
-sudo rm fetch.php?media=piratebox-scripts_0.4.tar.gz
-sudo tar xzvf piratebox*.tar.gz
+sudo cp -i piratebox-ws_0.2.0.tar.gz /opt/piratebox
+sudo tar xzvf piratebox-ws_0.2.0.tar.gz
 cd /tmp/piratebox
 sudo cp -rv piratebox /opt
 sudo ln -s /opt/piratebox/init.d/piratebox /etc/init.d/piratebox 
@@ -79,9 +79,8 @@ echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
 echo "4) Manage Download / Upload Folder"
-echo "5) Just Download the Scripts"
-echo "6) Configure"
-echo "7) Quit"
+echo "5) Configure"
+echo "6) Quit"
 ;;
 
 "Start PirateBox")
@@ -91,9 +90,8 @@ echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
 echo "4) Manage Download / Upload Folder"
-echo "5) Just Download the Scripts"
-echo "6) Configure"
-echo "7) Quit"
+echo "5) Configure"
+echo "6) Quit"
 ;;
 
 "Stop PirateBox")
@@ -104,34 +102,14 @@ echo "1) Quick install for Debian based systems"
 echo "2) Start PirateBox"
 echo "3) Stop PirateBox"
 echo "4) Manage Download / Upload Folder"
-echo "5) Just Download the Scripts"
-echo "6) Configure"
-echo "7) Quit"
+echo "5) Configure"
+echo "6) Quit"
 ;;
 
 "Manage PirateBox Download / Upload Folder")
 sudo nautilus /opt/piratebox/share
 ;;
 
-"Just Download the Scripts")
-sudo wget -P /tmp/ http://piratebox.aod-rpg.de/dokuwiki/lib/exe/fetch.php?media=piratebox-scripts_0.4.tar.gz
-cd /tmp/
-sudo cp -i fetch.php?media=piratebox-scripts_0.4.tar.gz piratebox-scripts_0.4.tar.gz
-sudo rm fetch.php?media=piratebox-scripts_0.4.tar.gz
-wget -P /opt/piratebox/bin https://github.com/terrorbyte/PirateBox-Manager/raw/master/PirateBoxManager.sh
-
-echo "#####################"
-echo "#Files saved in /tmp#"
-echo "#####################"
-echo ""
-echo "1) Quick install for Debian based systems"
-echo "2) Start PirateBox"
-echo "3) Stop PirateBox"
-echo "4) Manage Download / Upload Folder"
-echo "5) Just Download the Scripts"
-echo "6) Configure"
-echo "7) Quit"
-;;
 "Quit")
 break
 ;;
