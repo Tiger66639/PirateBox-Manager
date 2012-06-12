@@ -17,8 +17,8 @@
 # Credit for the wonderful scripts goes to Matthias Strubel
 #                       
 ###########################################################################################################################
-###########Version 0.9.5###################################################################################################
-#Created Update Option (still untested) and Update.sh to the files
+###########Version 0.9.6###################################################################################################
+#bug fixes
 ###########################################################################################################################
 #Add Debugging for: []
 #No package for dnsmasq and hostapd (Older versions 10.04 and below do not have universe debs active by default, see comments in option 1) []
@@ -64,6 +64,7 @@ sudo cp -i piratebox-ws_0.2.0.tar.gz /opt/piratebox
 sudo tar xzvf piratebox-ws_0.2.0.tar.gz
 cd /tmp/piratebox
 sudo cp -rv piratebox /opt
+sudo tar xzvf /opt/piratebox
 sudo ln -s /opt/piratebox/init.d/piratebox /etc/init.d/piratebox 
 sudo chmod 777 /opt/piratebox/chat/cgi-bin/data.pso
 echo "192.168.77.1  piratebox.lan">>/etc/hosts
