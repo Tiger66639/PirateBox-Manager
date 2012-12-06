@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import os
+import shutil
 import platform
 import subprocess
 import argparse
+import configparser
 ###Pre-recs###
 #dnsmasq
 #hostapd
@@ -22,7 +24,7 @@ __________ __                 __         __________   ____    ____
                           \/            \/       \/  |____|  |____|       \/        
 \033[0m
 """
-
+#Command Line Arguments
 parser = argparse.ArgumentParser(description="A tool to use your laptops wireless card as a PirateBox. This also stores files for later.")
 parser.add_argument("command", metavar="start / stop", help="Start or Stop Piratebox, if you run start and PirateBox is already running it will restart all the everything with the new (or same parameters).\n")
 parser.add_argument("-i", "--interface", help="Select an interface, or else defaults to wlan0\n")
@@ -39,4 +41,47 @@ parser.add_argument("-g", "--gui", "-m", "--menu", action="store_true", help="Dr
 
 args = parser.parse_args()
 
-print(banner)
+#Main function
+#Print Banner
+def main():
+	print(banner)
+	if args.command.lower() == "start":
+		start()
+	elif args.command.lower() == "stop":
+		stop()
+	#else may not be necessary due to arg parser catching it.
+	else:
+		print("Incorrect input: you must use start or stop") 
+#Declarations
+def default_config():
+	interface = "wlan0" #TODO change to config parser
+	driver = "nl80211"
+	ssid = "PirateBox: Share Freely"
+	hw_mode = "g" #TODO g+n?
+	channel = "8"
+	auth_algs = "1" 
+
+def custom_config():
+	print("custom_config") #place holder TODO delete
+	#interface = #config parser
+	#driver = #config parser
+	#ssid
+	#hw_mode
+	#channel
+	#auth_algs	
+
+#Config Parser
+#First check if the user wants to read a different config
+if args.config:
+        custom_config()
+else:
+	default_config()
+
+#Start function
+def start():
+	
+#Stop function
+def stop():
+	
+#Call main
+main()
