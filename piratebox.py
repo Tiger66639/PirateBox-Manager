@@ -32,6 +32,9 @@ parser.add_argument("-c", "--config", help="Specifies a configuration file to us
 parser.add_argument("-s", "--ssid", help="Change your ssid to broadcast.\n")
 parser.add_argument("--channel", help="Change channel to broadcast on.\n")
 parser.add_argument("-d", "--driver", help="Change your driver for hostapd to use, default is mac80211\n")
+parser.add_argument("-l", "--lighttpd", help="Specify a lighttpd config file")
+parser.add_argument("-n", "--dnsmasq", help="Specify a dnsmasq config file")
+parser.add_argument("-a", "--hostapd", help="Specify a hostapd config file")
 parser.add_argument("-g", "--gui", "-m", "--menu", action="store_true", help="Drop into a menu driven system, your settings are not preserved.\n") #g will eventually point to a real gui
  
 #TODO
@@ -50,9 +53,16 @@ def main():
 	elif args.command.lower() == "stop":
 		stop()
 	#else may not be necessary due to arg parser catching it.
-	else:
-		print("Incorrect input: you must use start or stop") 
+	#else:
+		#print("Incorrect input: you must use start or stop") 
 #Declarations
+#lighttpd_conf = "/opt/piratebox/conf/piratebox_lighttpd.conf"
+#hostapd_conf = "/opt/piratebox/conf/piratebox_hostapd.conf"
+#dnsmasq_conf = "/opt/piratebox/conf/dnsmasq.conf"
+lighttpd_conf = "/opt/piratebox/conf/piratebox_lighttpd.conf"
+hostapd_conf = "/opt/piratebox/conf/piratebox_hostapd.conf"
+dnsmasq_conf = "/opt/piratebox/conf/dnsmasq.conf"
+
 def default_config():
 	interface = "wlan0" #TODO change to config parser
 	driver = "nl80211"
@@ -62,6 +72,7 @@ def default_config():
 	auth_algs = "1" 
 
 def custom_config():
+	#TODO Parse the specified config
 	print("custom_config") #place holder TODO delete
 	#interface = #config parser
 	#driver = #config parser
@@ -70,6 +81,12 @@ def custom_config():
 	#channel
 	#auth_algs	
 
+#Gui def
+def gui():
+	#print("Requires root")
+	subprocess.call("sudo bin/bash /opt/piratebox/PirateBoxMenu.sh", shell = True)
+	exit()
+
 #Config Parser
 #First check if the user wants to read a different config
 if args.config:
@@ -77,11 +94,43 @@ if args.config:
 else:
 	default_config()
 
+#Parse Command line args (These overwrite config file)
+#First check for gui so you don't waste resources
+if args.gui:
+	gui()
+
+if args.interface:
+	interface = args.interface
+
+if args.ssid:
+	ssid = args.ssid
+
+if args.channel:
+	channel = args.channel
+
+if args.driver:
+	driver = args.driver
+
+#TODO Rename lighttpd_conf to something not confusable with args.lighttpd-conf, for all of the below
+if args.lighttpd:
+	lighttpd_conf = args.lighttpd
+
+if args.dnsmasq:
+	dnsmasq_conf = args.dnsmasq
+
+if args.hostapd:
+	hostapd_conf = args.dnsmasq
+
 #Start function
 def start():
-	
+	#Start Lighttpd
+	subprocess.call("lighttpd -f %s" % lighttpd_conf, shell=True)
+	#Start Dnsmasq
+	#subprocess.call(shell = True, "dnsmasq"
+	#Start Hostapd
 #Stop function
 def stop():
-	
+	print("Stop")
+
 #Call main
 main()
